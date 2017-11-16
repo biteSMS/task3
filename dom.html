@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>task3</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+    <!--   
+    <li>第一名：福州（样例），10</li>
+      <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+  <script type="text/javascript">
+    var aqiData = [
+      ["北京", 90],
+      ["上海", 50],
+      ["福州", 10],
+      ["广州", 50],
+      ["成都", 90],
+      ["西安", 100]
+    ];
+
+    (function () {
+
+      /*
+      在注释下方编写代码
+      遍历读取aqiData中各个城市的数据
+      将空气质量指数大于60的城市显示到aqi-list的列表中
+      */
+      var pollutedCitys = new Array(); //新建一个数组用于储存大于60的城市
+      var m = 0;
+      for (var i = 0; i < aqiData.length; i++) //利用循环筛选出大于60的数组
+      {
+        if (aqiData[i][1] > 60) {
+          pollutedCitys[m] = aqiData[i]; //将筛选出的数组储存于新建数组中
+          m++;
+        }
+      }
+      var down = function (x, y) //二维数组降序函数
+      {
+        return y[1] - x[1];
+      }
+      pollutedCitys.sort(down); //按空气指数大小降序
+      var ul = document.getElementById("aqi-list"); //获取ul中的元素
+      for (var n = 0; n < pollutedCitys.length; n++) //利用循环输出数组
+      {
+        var newnode = document.createElement("li"); //创建li节点
+        newnode.innerHTML = "第" + (n + 1) + "名:" + pollutedCitys[n][0] + "," + pollutedCitys[n][1]; //向新节点插入新建数组的内容
+        ul.appendChild(newnode); //添加li节点
+      }
+    })();
+  </script>
+</body>
+
+</html>
